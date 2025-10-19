@@ -37,6 +37,6 @@ if __name__ == "__main__":
     server = serve(port, temperature)
     try:
         while True:
-            time.sleep(86400)
+            time.sleep(360)
     except KeyboardInterrupt:
         server.stop(0)
