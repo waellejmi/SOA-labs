@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Float, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 DATABASE_URL = "postgresql://wael:root@localhost:5432/inventory"
 engine = create_engine(DATABASE_URL)
