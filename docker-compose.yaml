@@ -1,0 +1,30 @@
+services:
+  server1:
+    build: .
+    container_name: weather_server1
+    environment:
+      - PORT=50051
+      - TEMP=26.0
+    command: python weather_server_1.py 50051 26.0
+    ports:
+      - "50051:50051"
+
+  server2:
+    build: .
+    container_name: weather_server2
+    environment:
+      - PORT=50052
+      - TEMP=25.0
+    command: python weather_server_1.py 50052 25.0
+    ports:
+      - "50052:50052"
+
+
+  client:
+    build: .
+    container_name: client
+    depends_on:
+      - server1
+      - server2
+    command: python client.py
+
