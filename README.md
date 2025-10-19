@@ -26,7 +26,7 @@ pytest soap/test_the_soap_service.py
 
 ## SOAP vs MONOLITHIC
 Thanks to WSDL, we can enforce structure and we can clearly see this in this snippet of XML/WSDL file:
-```
+```xml
 <xs:complexType name="CreateProduct">
   <xs:sequence>
     <xs:element name="name" type="xs:string" minOccurs="0"/>
@@ -37,3 +37,12 @@ Thanks to WSDL, we can enforce structure and we can clearly see this in this sni
 ```
 We can see the type checks and for example name is string not nullable.
 ALso we can see that is more modular than our monolithic approach, so we can import and do small changes without redeploying the whole application.
+
+
+# REST
+Running this will only start the server, you will need to visit `/docs` or `/redoc` to see the swagger ui or openapi.
+```python
+python rest/app.py
+```
+REST is great for web/mobile apps needing speed, simplicity, and scalability.
+While,SOAP is better for enterprise applications needing strict standards, security, and transactional reliability.
