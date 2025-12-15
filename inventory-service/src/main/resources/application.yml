@@ -24,7 +24,24 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
         spring.json.value.default.type: com.lab.inventory.dto.OrderEventDTO
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 kafka:
   topic:
     order-events: order-events
+    order-events-dlq: order-events-dlq
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true

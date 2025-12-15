@@ -30,3 +30,20 @@ spring:
 kafka:
   topic:
     order-events: order-events
+    order-events-dlq: order-events-dlq
+  partitions: 3
+  replication-factor: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+

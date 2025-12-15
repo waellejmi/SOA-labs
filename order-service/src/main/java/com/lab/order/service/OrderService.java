@@ -24,7 +24,6 @@ public class OrderService {
     
     @Transactional
     public Order createOrder(OrderDTO orderDTO) {
-        // Save order to database
         Order order = new Order();
         order.setProductName(orderDTO.getProductName());
         order.setQuantity(orderDTO.getQuantity());
@@ -34,7 +33,6 @@ public class OrderService {
         Order savedOrder = orderRepository.save(order);
         log.info("Order saved to database: {}", savedOrder.getId());
         
-        // Publish event to Kafka
         OrderEventDTO event = new OrderEventDTO(
             savedOrder.getId(),
             savedOrder.getProductName(),
@@ -43,8 +41,10 @@ public class OrderService {
             "ORDER_CREATED"
         );
         
-        kafkaTemplate.send(orderEventsTopic, event);
-        log.info("Order event published to Kafka: {}", event);
+        // Use customer email as partition key for ordering
+        String partitionKey = savedOrder.getCustomerEmail();
+        kafkaTemplate.send(orderEventsTopic, partitionKey, event);
+        log.info("Order event published to Kafka with key: {}", partitionKey);
         
         return savedOrder;
     }
