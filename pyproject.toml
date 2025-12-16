@@ -1,0 +1,20 @@
+[project]
+name = "federated-learning-lab"
+version = "0.1.0"
+description = "federated learning lab"
+authors = [
+    { name = "waellejmi" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "numpy",
+    "numba-cuda[cu13]",
+    "python-multipart"
+]
+# [tool.basedpyright]
+# include = ["*"]
+#
+# reportCallIssue = "none" 
+# reportIndexissue = "none"

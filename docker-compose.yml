@@ -1,0 +1,41 @@
+services:
+  client1:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - "8001:8000"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+    command: ["uvicorn", "client:app", "--host", "0.0.0.0"]
+
+  client2:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - "8002:8000"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+    command: ["uvicorn", "client:app", "--host", "0.0.0.0"]
+
+  client3:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - "8003:8000"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+    command: ["uvicorn", "client:app", "--host", "0.0.0.0"]
+
+  aggregator:
+    build:
+      context: .
+      dockerfile: Dockerfile.aggregator
+    ports:
+      - "9000:8000"
+    command: ["uvicorn", "aggregator:app", "--host", "0.0.0.0"]
